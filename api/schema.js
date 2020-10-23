@@ -12,11 +12,14 @@ module.exports = buildSchema(`
         completed: Boolean!
         steps: [Step]
     }
+    
+    enum Status {
+        COMPLETED
+        UNCOMPLETED
+    }
 
     type Query {
         todo(id: ID!): Todo,
-        todos: [Todo]!
-        completedTodos: [Todo]
-        uncompletedTodos: [Todo]
+        todos(status: Status): [Todo]!
     }
 `)

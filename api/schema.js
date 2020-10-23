@@ -8,6 +8,7 @@ module.exports = buildSchema(`
 
     type Todo {
         id: ID!
+        # TITLE TODO
         title: String!
         completed: Boolean!
         steps: [Step]
@@ -21,5 +22,22 @@ module.exports = buildSchema(`
     type Query {
         todo(id: ID!): Todo,
         todos(status: Status): [Todo]!
+    }
+    
+    input StepInput {
+        title: String!
+        completed: Boolean = false
+    }
+    
+    input TodoInput {
+        title: String!
+        completed: Boolean = false
+        steps: [StepInput]
+    }
+    
+    type Mutation {
+        createTodo(input: TodoInput!): Todo
+        updateTodo(id: ID!, input: TodoInput!): Todo
+        deleteTodo(id: ID!): ID
     }
 `)
